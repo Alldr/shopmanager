@@ -34,7 +34,7 @@
               <span>用户管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">
+              <el-menu-item index="users">
                 <i class="el-icon-menu"></i>
                 <span>用户列表</span>
               </el-menu-item>
@@ -123,6 +123,8 @@ export default {
     }
   },
   methods: {
+    handleOpen(key, keyPath) {},
+    handleClose(key, keyPath) {},
     //退出登录
     handleLogout() {
       //清除token
@@ -149,5 +151,8 @@ export default {
 }
 .logout {
   line-height: 60px;
+}
+.main {
+  background-color: #e7eef7;
 }
 </style>
