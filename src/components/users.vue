@@ -1,11 +1,8 @@
 <template>
   <el-card class="card">
+    <!-- 面包屑 -->
+    <my-bread level1="用户列表" level2="用户详情"></my-bread>
     <!-- 搜索栏 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-      <el-breadcrumb-item>用户详情</el-breadcrumb-item>
-    </el-breadcrumb>
     <el-row>
       <el-col>
         <el-input
@@ -297,8 +294,6 @@ export default {
     },
     //获取表格数据
     async getTableData() {
-      const AUTH_TOKEN = localStorage.getItem("token");
-      this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
       const res = await this.$http.get(
         `users?query=${this.query}&pagesize=${this.pagesize}&pagenum=${
           this.pagenum

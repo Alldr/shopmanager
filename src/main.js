@@ -6,6 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/index.css'
 import Http from '@/plugins/http.js'
 import App from './App'
+import MyBread from '@/components/cusBread.vue'
 import router from '@/router'
 import moment from 'moment'
 
@@ -13,6 +14,7 @@ Vue.config.productionTip = false
 
 Vue.use(Http)
 Vue.use(ElementUI)
+Vue.component(MyBread.name, MyBread)
 Vue.filter('fmtDate', (v) => {
   return moment(v).format('YYYY-MM-DD')
 })
