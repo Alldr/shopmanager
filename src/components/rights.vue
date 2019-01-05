@@ -40,7 +40,6 @@ export default {
         this.rightsList = data;
         this.$message.success(msg);
       }
-      console.log(this.rightsList);
     }
   }
 };
