@@ -175,4 +175,8 @@ export default {
   margin-right: 5px;
   margin-bottom: 5px;
 }
+.el-dialog__body {
+  height: 400px;
+  overflow: auto;
+}
 </style>

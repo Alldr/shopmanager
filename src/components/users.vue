@@ -267,7 +267,7 @@ export default {
         this.$message.warning(msg);
       }
     },
-    //显示添加用户表单
+    //显示添加用户的对话框
     showDialog() {
       this.form = {};
       this.dialogFormVisibleAdd = true;

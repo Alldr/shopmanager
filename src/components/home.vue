@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       menusData: []
-    }
+    };
   },
   created() {
     this.getMenus();
@@ -80,8 +80,6 @@ export default {
         this.$message.success(msg);
         this.menusData = data;
       }
-      console.log(this.menusData);
-      
     }
   }
 };
