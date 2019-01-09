@@ -7,6 +7,9 @@ import Rights from '@/components/rights'
 import Roles from '@/components/roles'
 import Goods from '@/components/goods'
 import GoodsAdd from '@/components/goodsAdd'
+import Params from '@/components/params'
+import Categories from '@/components/categories'
+import Orders from '@/components/orders'
 
 import {
   Message
@@ -48,6 +51,18 @@ const router = new Router({
       name: 'goodsAdd',
       path: '/goodsAdd',
       component: GoodsAdd
+    }, {
+      name: 'params',
+      path: '/params',
+      component: Params
+    }, {
+      name: 'categories',
+      path: '/categories',
+      component: Categories
+    }, {
+      name: 'orders',
+      path: '/orders',
+      component: Orders
     }]
   }]
 })

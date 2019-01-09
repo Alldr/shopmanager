@@ -77,7 +77,6 @@ export default {
         meta: { msg, status }
       } = res.data;
       if (status === 200) {
-        this.$message.success(msg);
         this.menusData = data;
       }
     }

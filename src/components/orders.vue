@@ -1,0 +1,13 @@
+<template>
+  <el-card class="card">
+    <!-- 面包屑 -->
+    <my-bread level1="商品管理" level2="商品列表"></my-bread>
+  </el-card>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style>
+</style>
