@@ -9,7 +9,7 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-table :data="roles" style="width: 100%">
+    <el-table :data="roles" v-loading="loading" style="width: 100%">
       <el-table-column type="expand" width="80">
         <template slot-scope="rights">
           <el-row v-for="(item1,i) in rights.row.children" :key="i">
@@ -88,6 +88,7 @@
 export default {
   data() {
     return {
+      loading: false,
       roles: [],
       dialogVisible: false,
       treeData: [],
@@ -151,12 +152,14 @@ export default {
       }
     },
     async getRolesList() {
+      this.loading = true;
       const res = await this.$http.get(`roles`);
       const {
         data,
         meta: { status }
       } = res.data;
       if (status === 200) {
+        this.loading = false;
         this.roles = data;
       }
     }
@@ -164,7 +167,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   height: 100%;
 }

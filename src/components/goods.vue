@@ -18,7 +18,14 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-table :data="goodsData" border height="500" style="width: 100%" class="table">
+    <el-table
+      :data="goodsData"
+      border
+      height="500"
+      v-loading="loading"
+      style="width: 100%"
+      class="table"
+    >
       <el-table-column type="index" label="#" width="80"></el-table-column>
       <el-table-column prop="goods_name" label="商品名称"></el-table-column>
       <el-table-column prop="goods_price" label="商品价格(元)" width="80"></el-table-column>
@@ -57,6 +64,7 @@
 export default {
   data() {
     return {
+      loading: false,
       query: "",
       goodsData: [],
       pagenum: 1,
@@ -103,6 +111,7 @@ export default {
     },
     //获取商品数据
     async getGoodsData() {
+      this.loading = true;
       const res = await this.$http.get(
         `goods?query=${this.query}&pagenum=${this.pagenum}&pagesize=${
           this.pagesize
@@ -113,6 +122,7 @@ export default {
         meta: { status }
       } = res.data;
       if (status === 200) {
+        this.loading = false;
         this.goodsData = data.goods;
         this.total = data.total;
       }
@@ -132,7 +142,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   height: 100%;
 }

@@ -1,23 +1,21 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import Login from '@/components/login'
-import Home from '@/components/home'
-import Users from '@/components/users'
-import Rights from '@/components/rights'
-import Roles from '@/components/roles'
-import Goods from '@/components/goods'
-import GoodsAdd from '@/components/goodsAdd'
-import Params from '@/components/params'
-import Categories from '@/components/categories'
-import Orders from '@/components/orders'
+import VueRouter from 'vue-router'
 
-import {
-  Message
-} from 'element-ui'
+const Login = () => import('@/components/login')
+const Home = () => import('@/components/home')
+const Users = () => import('@/components/users')
+const Rights = () => import('@/components/rights')
+const Roles = () => import('@/components/roles')
+const Goods = () => import('@/components/goods')
+const GoodsAdd = () => import('@/components/goodsAdd')
+const Params = () => import('@/components/params')
+const Categories = () => import('@/components/categories')
+const Orders = () => import('@/components/orders')
+const Reports = () => import('@/components/reports')
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-const router = new Router({
+const router = new VueRouter({
   routes: [{
     path: '/',
     redirect: {
@@ -63,6 +61,10 @@ const router = new Router({
       name: 'orders',
       path: '/orders',
       component: Orders
+    }, {
+      name: 'reports',
+      path: '/reports',
+      component: Reports
     }]
   }]
 })
@@ -71,7 +73,6 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     if (!localStorage.getItem('token')) {
-      Message.warning('请先登录')
       router.push({
         path: '/login'
       })

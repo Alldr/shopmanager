@@ -3,7 +3,7 @@
     <!-- 面包屑 -->
     <my-bread level1="订单管理" level2="订单列表"></my-bread>
     <!-- 表格 -->
-    <el-table :data="tableData" class="table" border style="width: 100%" height="450" stripe>
+    <el-table :data="tableData" class="table" v-loading="loading" border style="width: 100%" height="450" stripe>
       <el-table-column type="index" label="#"></el-table-column>
       <el-table-column prop="order_number" label="订单编号" width="180"></el-table-column>
       <el-table-column prop="order_price" label="订单价格"></el-table-column>
@@ -75,6 +75,7 @@ import options from '@/assets/city_data_element.js'
 export default {
   data() {
     return {
+      loading: false,
       tableData: [],
       pagenum: 1,
       pagesize: 5,
@@ -97,11 +98,13 @@ export default {
     },
     //获取订单列表
     async getTableData() {
+      this.loading = true;
       const res = await this.$http.get(
         `orders?query=${this.query}&pagesize=${this.pagesize}&pagenum=${
           this.pagenum
         }`
       );
+      this.loading = false;
       this.tableData = res.data.data.goods;
       this.total = res.data.data.total;
       this.pagenum = res.data.data.pagenum - 0;
@@ -121,7 +124,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   height: 100%;
 }

@@ -5,7 +5,7 @@
     <!-- 按钮 -->
     <el-button type="primary" class="btn" plain @click="showAddCate()">添加分类</el-button>
     <!-- 表格 -->
-    <el-table :data="goodsData" height="500" style="width: 100%" class="table">
+    <el-table :data="goodsData" v-loading="loading" height="500" style="width: 100%" class="table">
       <el-tree-grid
         file-icon="icon icon-file"
         folder-icon="icon icon-folder"
@@ -90,6 +90,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       goodsData: [],
       pagenum: 1,
       pagesize: 10,
@@ -160,6 +161,7 @@ export default {
     },
     //获取商品列表
     async getGoodsCate() {
+      this.loading = true;
       const res = await this.$http.get(
         `categories?query=${this.query}&pagesize=${this.pagesize}&pagenum=${
           this.pagenum
@@ -169,6 +171,7 @@ export default {
         data: { total, result },
         meta: { status, msg }
       } = res.data;
+      this.loading = false;
       this.goodsData = result;
       this.total = total;
     },
@@ -187,7 +190,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .btn {
   margin-top: 20px;
 }

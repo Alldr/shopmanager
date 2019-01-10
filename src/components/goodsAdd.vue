@@ -206,7 +206,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   height: 100%;
 }

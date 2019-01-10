@@ -3,7 +3,7 @@
     <!-- 面包屑 -->
     <my-bread level1="权限管理" level2="权限列表"></my-bread>
     <!-- 表格 -->
-    <el-table :data="rightsList" height="550" border style="width: 100%" class="table">
+    <el-table :data="rightsList" v-loading="loading" height="550" border style="width: 100%" class="table">
       <el-table-column type="index" label="#" width="120"></el-table-column>
       <el-table-column prop="authName" label="权限名称" width="220"></el-table-column>
       <el-table-column prop="path" label="路径" width="220"></el-table-column>
@@ -23,7 +23,8 @@
 export default {
   data() {
     return {
-      rightsList: []
+      rightsList: [],
+      loading: false
     };
   },
   created() {
@@ -31,12 +32,14 @@ export default {
   },
   methods: {
     async getRightsList() {
+      this.loading = true;
       const res = await this.$http.get(`rights/list`);
       const {
         data,
         meta: { msg, status }
       } = res.data;
       if (status === 200) {
+        this.loading = false;
         this.rightsList = data;
         this.$message.success(msg);
       }
@@ -45,7 +48,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   height: 100%;
 }

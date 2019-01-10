@@ -18,7 +18,7 @@
       </el-col>
     </el-row>
     <!-- 表格 -->
-    <el-table :data="tableData" style="width: 100%" height="300">
+    <el-table :data="tableData" v-loading="loading" style="width: 100%" height="300">
       <el-table-column prop="id" label="#" width="80"></el-table-column>
       <el-table-column prop="username" label="姓名" width="100"></el-table-column>
       <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
@@ -137,6 +137,7 @@
 export default {
   data() {
     return {
+      loading: false,
       tableData: [],
       query: "",
       pagenum: 1,
@@ -215,8 +216,6 @@ export default {
         this.dialogFormVisibleEdit = false;
         this.$message.success(msg);
         this.getTableData();
-      } else {
-        this.$message.warning(msg);
       }
     },
     //显示编辑用户表单
@@ -263,8 +262,6 @@ export default {
         this.$message.success(msg);
         this.pagenum = 1;
         this.getTableData();
-      } else {
-        this.$message.warning(msg);
       }
     },
     //显示添加用户的对话框
@@ -294,6 +291,7 @@ export default {
     },
     //获取表格数据
     async getTableData() {
+      this.loading = true;
       const res = await this.$http.get(
         `users?query=${this.query}&pagesize=${this.pagesize}&pagenum=${
           this.pagenum
@@ -304,17 +302,16 @@ export default {
         meta: { status, msg }
       } = res.data;
       if (status === 200) {
+        this.loading = false;
         this.tableData = users;
         this.total = total;
-      } else {
-        this.$message.warning(msg);
       }
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   height: 100%;
 }
